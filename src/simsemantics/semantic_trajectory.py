@@ -23,16 +23,17 @@ class SemanticTrajectory:
         Construct semantic trajectory object. Call calculate() before using attributes other than init parameters.
 
         Keyword arguments:
-        handoffs    -- (not yet used) indexes in text of starts of new "speaker" segments; eg the completion in a prompt/completion
-        engine      -- OpenAI embedding model by name (default 'text-embedding-ada-002')
-        api_key     -- OpenAI api key (default OPENAI_API_KEY os environment variable)
-        tokenizer   -- Hugging Face fast transformer (default GPT2TokenizerFast)
+        handoffs    --  (not yet used) indexes in text of starts of new "speaker" segments; eg the completion in a
+                        prompt/completion
+        engine      --  OpenAI embedding model by name (default 'text-embedding-ada-002')
+        api_key     --  OpenAI api key (default OPENAI_API_KEY os environment variable)
+        tokenizer   --  Hugging Face fast transformer (default GPT2TokenizerFast)
 
         Additional attributes:
 
-        encoding    -- encoding produced by tokenizer
-        ends        -- list of indexes (in original text) one past each token
-        delta_mus   -- list per token, delta between semantic embedding of prev token (init zeros) and curr token
+        encoding    --  encoding produced by tokenizer
+        ends        --  list of indexes (in original text) one past each token
+        delta_mus   --  list per token, delta between semantic embedding of prev token (init zeros) and curr token
         """
         self.text = text
         self.handoffs = handoffs if handoffs is not None else []
