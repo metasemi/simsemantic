@@ -17,14 +17,12 @@ class TrajectoryException(Exception):
 
 class Trajectory:
     """Semantic trajectory of a text string. Construct, calculate once, then use attributes read-only."""
-    def __init__(self, text, handoffs=None, engine=DEFAULT_ENGINE,
+    def __init__(self, text, engine=DEFAULT_ENGINE,
                  api_key=DEFAULT_OPENAI_API_KEY, tokenizer=transformers.GPT2TokenizerFast.from_pretrained('gpt2')):
         """
         Construct semantic trajectory object. Call calculate() before using attributes other than init parameters.
 
         Keyword arguments:
-        handoffs    --  (not yet used) indexes in text of starts of new "speaker" segments; eg the completion in a
-                        prompt/completion
         engine      --  OpenAI embedding model by name (default 'text-embedding-ada-002')
         api_key     --  OpenAI api key (default OPENAI_API_KEY os environment variable)
         tokenizer   --  Hugging Face fast transformer (default GPT2TokenizerFast)
@@ -36,7 +34,6 @@ class Trajectory:
         delta_mus   --  list per token, delta between semantic embedding of prev token (init zeros) and curr token
         """
         self.text = text
-        self.handoffs = handoffs if handoffs is not None else []
         self.engine = engine
         self.api_key = api_key
         self.tokenizer = tokenizer
